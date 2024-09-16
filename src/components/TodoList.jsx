@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodo } from '../features/todos/todoSlice';
 import TodoItem from './TodoItem';
+import { generateUniqueId } from '../utils/utils';  // <-- Importing generateUniqueId
 
 const TodoList = () => {
   const [inputValue, setInputValue] = useState('');
@@ -12,8 +13,9 @@ const TodoList = () => {
   const handleAdd = () => {
     if (inputValue) {
       dispatch(addTodo({
-        id: Date.now(),
-        text: inputValue
+        id: generateUniqueId(),  
+        text: inputValue,
+        date: new Date()          
       }));
       setInputValue('');
     }
